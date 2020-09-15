@@ -1,0 +1,54 @@
+{% extends '_user.html' %}
+
+{% block title %}AST{% endblock %}
+
+{% block header %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-manage' %}">Manage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            {%  endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Exit</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</header>
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                {% for lst in categ %}
+                    <tr>
+                    <td>{{ lst }}</td>
+                    <td>
+                        <a href="{% url 'adminwrap:get_excel' pk=lst.pk %}">EXCEL</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

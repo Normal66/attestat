@@ -1,0 +1,21 @@
+{% extends '_user.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Автоматизированная система тестирования - Управление Пользователями{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row text-center mb-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h1>{{ usr.user_id.first_name }} {{ usr.user_id.last_name }}</h1>
+            <form method="POST" class="post-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-primary btn-block">Сохранить</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

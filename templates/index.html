@@ -1,0 +1,64 @@
+{% extends '_user.html' %}
+
+{% block title %}Автоматизированная система тестирования{% endblock %}
+
+{% block header %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            {% if not douser.att_done %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'doattest' pk=douser.pk %}">Начать тестирование</a>
+                </li>
+            {%  endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
+            </li>
+            {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-manage' %}">Управление</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Админка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminwrap">Выгрузка вопросов</a>
+                </li>
+
+            {%  endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</header>
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    {% if arch %}
+    <div class="row">
+        <div class="col-md-12">
+            <p><u>МОИ АТТЕСТАЦИИ</u></p>
+            <table class="table">
+                {% for att in arch %}
+                    <tr>
+                        <td>
+<!--                            <a href="{% url 'user-result' pk=att.pk %}"><b>{{ att.start_test }} - {{ att.end_test }}</b></a> -->
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

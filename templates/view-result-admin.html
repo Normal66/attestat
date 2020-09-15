@@ -1,0 +1,113 @@
+{% extends '_user.html' %}
+
+{% block title %}Автоматизированная система тестирования{% endblock %}
+
+{% block header %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Главная</a>
+            </li>
+            {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-manage' %}">Управление</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Админка</a>
+                </li>
+            {%  endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</header>
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center"><b><i>{{ douser.user_id.first_name }} {{ douser.user_id.last_name }}</i></b></p>
+            <p class="text-center">
+                Аттестация : <b>{{ douser.start_test }} - {{ douser.end_test }}  | ( {{ minute }} мин )</b>
+            </p>
+            <p class="text-center"><b>Схема N {{ douser.schema }}</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+
+
+    <div class="row text-left">
+        <div class="col-md-12">
+            <table class="table">
+                {% for query in resatt %}
+                    {% for key_one, value_one in query.items %}
+                        <tr>
+                            <td>
+                                <b>{{ key_one }}</b>
+                                <table class="table-bordered" width="100%">
+                                 <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-7">Ответ</th>
+                                        <th class="col-2">Правильный ответ</th>
+                                        <th class="col-2">Ответ пользователя</th>
+                                        <th class="col-1">БАЛЛ</th>
+                                    </tr>
+                                 </thead>
+                                        {% for key_two, values_two in value_one.items %}
+                                            <tr class="d-flex">
+                                                <td class="col-md-7"><p class="text-left">{{ key_two }}</p></td>
+                                            <td class="col-md-2">
+                                               {% if values_two.0 %}
+                                                ДА
+                                               {% else %}
+                                                НЕТ
+                                               {% endif %}
+                                            </td>
+                                            <td class="col-md-2">
+                                               {% if values_two.1 %}
+                                                ДА
+                                               {% else %}
+                                                НЕТ
+                                               {% endif %}
+                                            </td>
+                                            <td class="col-md-1 text-right">
+                                                {{ values_two.2 }}
+                                            </td>
+                                            </tr>
+                                        {% endfor %}
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-4">
+            Всего вопросов: <b>{{ vall }}</b>
+        </div>
+        <div class="col-md-4">
+            Правильных ответов: <b>{{ vtrue }}</b>
+        </div>
+        <div class="col-md-4">
+            Неправильных ответов: <b>{{ vfalse }}</b>
+        </div>
+    </div>
+</div>
+{% endblock %}

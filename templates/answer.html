@@ -1,0 +1,27 @@
+{% extends '_user.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Автоматизированная система тестирования - Ответ на вопрос{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h3>{{ loctitle }}</h3>
+        <form method="post" action="" class="">
+                                               {% csrf_token %}
+        {% crispy form   %}
+        {% crispy formset formset.form.helper %}
+
+        <input class="submit" type="submit" value="Submit data">
+
+    </form>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">ОТВЕТИТЬ</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

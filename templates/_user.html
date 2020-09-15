@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="{% static 'mdb.min.css' %}" crossorigin="anonymous"> -->
+	<script type="text/javascript" src="{% static 'jquery-3.4.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap.min.js' %}"></script>
+<!--	<script type="text/javascript" src="{% static 'mdb.min.js' %}"></script> -->
+
+    <title></title>
+    <style>
+		details summary {
+			display: block;  /* у summary по умолчанию свойство display в значении list-item, потому поддерживается свойство list-style */
+  			width: 10em;
+  			width: -webkit-fit-content;
+  			width: -moz-fit-content;
+  			width: fit-content;  /* блок раскрывается при щелчке по кнопке, а не по всей строке */
+  			border-bottom: 1px dotted;  /* подводка точками или тире часто используется для элементов, с которыми пользователю предлагается взаимодействовать, можно заменить на text-decoration */
+  			outline-style: none;  /* удалить обводку при фокусе */
+  			cursor: pointer;
+		}
+		details summary::-webkit-details-marker {  /* нестандартный псевдоэлемент Google Chrome */
+  			display: none;
+		}
+        .upbtn {z-index: 9999;width: 70px;height: 70px;color: #FFF;position: fixed;bottom: 20px;right: 20px;cursor: pointer;border:3px solid #BFE2FF;border-radius:50%;transform: scale(0);transition: all .7s ease-in-out;background-position: center center;background-repeat: no-repeat;background-color: #337AB7;background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ5MS44NTggNDkxLjg1OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDkxLjg1OCA0OTEuODU4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTQ5MS44NTgsNDQyLjQ2MWMwLDEzLjkzMS0xMS4yOTMsMjUuMjI0LTI1LjIyNCwyNS4yMjRMMjQ1LjkzLDM3My4wOTdMMjUuMjI0LDQ2Ny42ODYgICAgQzExLjI5Miw0NjcuNjg2LDAsNDU2LjM5MiwwLDQ0Mi40NjFMMjI3LjAxMSwzMi41OGMwLDAsMTguOTE4LTE4LjkxOCwzNy44MzQsMEMyODMuNzY0LDUxLjQ5OSw0OTEuODU4LDQ0Mi40NjEsNDkxLjg1OCw0NDIuNDYxeiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)}
+	    .upbtn:hover {transform: scale(1.2)!important;}
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="background-image: url({{ '/media/GlassHeader.jpg' }}); background-size: cover">
+            <div class="col-md-12">
+                <table class="table" width="100%">
+                    <tr>
+                        <td style="display: block; width: 140px"><a href="/">
+                            <img src="{{ '/media/logo.png' }}" height="40" style="margin-left: 8px; margin-bottom: 6px" alt="на главную страницу АСУ ТЕСТ" /></a>
+                        </td>
+                        <td style="font-size: 16px; color: #4B4B57; vertical-align: middle; font-weight: bold" align="left">
+                            <div style="text-align: center">
+                                                    АСУ "ТЕСТИРОВАНИЕ" филиала Федеральной кадастровой палаты<br/>
+                                                    Росреестра по УФО<br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% block header %}
+    {% endblock %}
+      {% block main %}
+      {% endblock %}
+{% block jsscript %}
+{% endblock %}
+<script>
+        $('body').append('<div class="upbtn"></div>');
+        $(window).scroll(function() {if ($(this).scrollTop() > 100) {$('.upbtn').css({transform: 'scale(1)'});} else {$('.upbtn').css({transform: 'scale(0)'});}});
+        $('.upbtn').on('click',function() {$('html, body').animate({scrollTop: 0}, 500);return false;});
+</script>
+</body>
+</html>

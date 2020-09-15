@@ -1,0 +1,85 @@
+{% extends '_user.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Автоматизированная система тестирования - Управление Пользователями{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row text-right">
+        <div class="col-md-12">
+            <div class="redirect-url">
+                <p>Автоматическое завершение тестирования через <span id="time">{{ mins }}</span> минут</p>
+            </div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-8">
+            <table class="table">
+                <thead><tr><th scope="col">Вопрос</th></tr></thead>
+                <tbody>
+                {% for locQuest in quest %}
+                    {% if locQuest.quest_done %}
+                    <tr class="table-primary">
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <td>
+                            <a  href="{% url 'doanswer' pk=locQuest.pk %}">{{ locQuest }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <p class="text-center"><b>Отвечено</b></p>
+            {% for list_done in qdone %}
+                {% for key, values in list_done.items %}
+                    <details>
+                        <summary>{{  key }}</summary>
+                        <table class="table-bordered">
+                                {% for answ in values.items %}
+                                    <tr>
+                                        <td>
+                                            {% if answ.1 %}
+                                                ДА
+                                            {% else %}
+                                                НЕТ
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                        {{  answ.0 }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                        </table>
+                    </details>
+<hr>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <p class="my-5">
+                <a  href="{% url 'done' %}"><button class="btn btn-primary btn-block">ЗАКОНЧИТЬ ТЕСТ</button></a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block jsscript %}
+<script>
+    function redirectTimeOut(s) {
+        document.getElementById('time').innerHTML = s;
+        if (s > 0)
+            {
+                setTimeout("redirectTimeOut(" + (--s) + ");", 60000);
+            }
+        else {
+            window.location.href = {% url 'done' %};
+        }
+    }
+    redirectTimeOut({{ mins }});
+</script>
+{% endblock %}

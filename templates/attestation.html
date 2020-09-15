@@ -1,0 +1,44 @@
+{% extends '_user.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Автоматизированная система тестирования - Ответ на вопрос{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row text-right">
+        <div class="col-md-12">
+            <div class="redirect-url">
+                <p>Автоматическое завершение тестирования через <span id="time">{{ mins }}</span> минут</p>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h3>{{ loctitle }}</h3>
+            <form method="post" action="" class="">
+                {% csrf_token %}
+                {{ formset.management_form }}
+<!--                {{ formset|crispy }} -->
+            <table class="table">
+                {% for form in formset %}
+                    <tr>
+                    {%  for fields in form %}
+                        <td>{{ fields }}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+                <p class="py-5">
+                    <button type="submit" class="btn btn-primary btn-block">ОТВЕТИТЬ</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+{% block jsscript %}
+<script>
+    function redirectTimeOut(s) {document.getElementById('time').innerHTML = s;if (s > 0) {setTimeout("redirectTimeOut(" + (--s) + ");", 60000);} else {window.location.href = {% url 'done' %};}}redirectTimeOut({{ mins }});
+</script>
+{% endblock %}

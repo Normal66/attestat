@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="{% static 'mdb.min.css' %}" crossorigin="anonymous"> -->
+	<script type="text/javascript" src="{% static 'jquery-3.4.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap.min.js' %}"></script>
+
+    <title></title>
+</head>
+<body>
+  <div  class="container">
+    <div  class="row justify-content-center my-5">
+      {% block main %}
+      {% endblock %}
+    </div>
+  </div>
+</body>
+</html>
